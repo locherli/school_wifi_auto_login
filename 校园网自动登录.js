@@ -16,10 +16,29 @@
     // 设置密码
     document.getElementById("password").value = "your_password";
 
-    // 选择“电信校园宽带” (@ctcc)
+    // 设置运营商，选填：移动、电信、联通、带宽
+    isp = '电信';
+
+    let isp_code;
+    switch (isp) {
+        case '移动':
+            isp_code = '@cmcc';
+            break;
+        case '电信':
+            isp_code = '@ctcc';
+            break;
+        case '联通':
+            isp_code = '@cucc';
+            break;
+        case '带宽':
+            isp_code = '@jxnu';
+            break;
+    }
+
+
     const domainSelect = document.getElementById("domain");
     for (let i = 0; i < domainSelect.options.length; i++) {
-        if (domainSelect.options[i].value === "@ctcc") {
+        if (domainSelect.options[i].value === isp_code) {
             domainSelect.selectedIndex = i;
             break;
         }

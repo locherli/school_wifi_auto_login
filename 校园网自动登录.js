@@ -4,9 +4,11 @@
 // @version      2025-09-02
 // @description  try to take over the world!
 // @author       locher
-// @match        http://172.17.1.2/
+// @match        http://172.17.1.2/*
+// @match        https://172.17.1.2/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=1.2
 // @grant        none
+// @run-at      document-end
 // ==/UserScript==
 
 (function autoLogin() {
@@ -17,7 +19,7 @@
     document.getElementById("password").value = "your_password";
 
     // 设置运营商，选填：移动、电信、联通、带宽
-    isp = '电信';
+    let isp = '电信';
 
     let isp_code;
     switch (isp) {
@@ -60,3 +62,4 @@
     console.log("✅ 已自动填写并提交登录信息（包括同意协议）");
 
 })();
+

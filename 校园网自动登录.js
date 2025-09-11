@@ -4,7 +4,7 @@
 // @version      2025-09-02
 // @description  try to take over the world!
 // @author       locher
-// @match        http://172.17.1.2/srun_portal_pc?ac_id=1&theme=pro
+// @match        http://172.17.1.2/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=1.2
 // @grant        none
 // ==/UserScript==
@@ -58,4 +58,5 @@
     document.getElementById("login-account").click();
 
     console.log("✅ 已自动填写并提交登录信息（包括同意协议）");
+
 })();

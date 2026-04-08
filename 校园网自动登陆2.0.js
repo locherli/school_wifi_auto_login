@@ -23,9 +23,9 @@
 
 
     async function isOnline() {
-        if (!navigator.onLine) return false;
 
-        // https://172.17.1.3:8080/assets/aaecd1cf/dialogs/attachment/fileTypeImages/icon_pdf.gif
+        if (navigator.onLine) return true;
+        if (!navigator.onLine) return false;
 
         try {
             const response = await new Promise((resolve) => {
@@ -97,6 +97,7 @@
 
         console.log("✅ 已自动填写并提交登录信息");
     }
+
 
 
     try {

@@ -2,21 +2,22 @@
 // @name         校园网自动登录
 // @namespace    http://172.17.1.2/
 // @version      2025-09-02
-// @description  try to take over the world!
+// @description  自动填写并点击登录
 // @author       locher
 // @match        http://172.17.1.2/*
 // @match        https://172.17.1.2/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=1.2
-// @grant        none
-// @run-at      document-end
+// @grant        unsafeWindow
+// @run-at       document-end
 // ==/UserScript==
 
-(function autoLogin() {
-    // 设置学号
-    document.getElementById("username").value = "your_student_id";
+(function () {
+  "use strict";
+
+      // 设置学号
+    const id = "your_student_id";
 
     // 设置密码
-    document.getElementById("password").value = "your_password";
+    const password = "your_password";
 
     // 设置运营商，选填：移动、电信、联通、带宽
     let isp = '电信';
@@ -38,28 +39,37 @@
     }
 
 
+
+  function doLogin() {
+    const userField = document.getElementById("username");
+    const pwField = document.getElementById("password");
+    const loginBtn = document.getElementById("login-account");
     const domainSelect = document.getElementById("domain");
-    for (let i = 0; i < domainSelect.options.length; i++) {
-        if (domainSelect.options[i].value === isp_code) {
-            domainSelect.selectedIndex = i;
-            break;
-        }
-    }
-
-    // 触发 change 事件（如果网站有监听）
-    domainSelect.dispatchEvent(new Event('change', { bubbles: true }));
-
-    // 勾选“我已阅读并同意使用协议”
     const protocolCheckbox = document.getElementById("protocol");
-    if (protocolCheckbox) {
-        protocolCheckbox.checked = true;
-        protocolCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+
+    if (!userField || !pwField || !loginBtn) {
+      console.log("未找到登录表单元素，退出。");
+      return;
     }
 
-    // 模拟点击登录按钮
-    document.getElementById("login-account").click();
+    // 1. 设置账号密码
+    userField.value = id;
 
-    console.log("✅ 已自动填写并提交登录信息（包括同意协议）");
+    pwField.value = password;
 
+    // 2. 设置运营商
+    if (domainSelect) {
+      domainSelect.value = isp_code;
+    }
+
+    // 3. 勾选协议
+    protocolCheckbox.checked = true;
+
+    loginBtn.click();
+  }
+
+  // 等待页面加载完毕后执行
+  window.addEventListener("load", () => {
+    setTimeout(doLogin, 500);
+  });
 })();
-

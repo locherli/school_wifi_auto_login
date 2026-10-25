@@ -24,7 +24,7 @@
 
     async function isOnline() {
 
-        if (navigator.onLine) return true;
+
         if (!navigator.onLine) return false;
 
         try {
